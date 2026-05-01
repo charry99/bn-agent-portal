@@ -389,17 +389,21 @@ def register_error_handlers(app):
 def setup_logging(app):
     """Setup application logging"""
     if not app.debug:
-        if not os.path.exists('logs'):
-            os.mkdir('logs')
-        
-        file_handler = logging.FileHandler('logs/agent_portal.log')
-        file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-        ))
-        file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
-        app.logger.setLevel(logging.INFO)
-        app.logger.info('Agent Portal startup')
+        try:
+            if not os.path.exists('logs'):
+                os.mkdir('logs')
+            
+            file_handler = logging.FileHandler('logs/agent_portal.log')
+            file_handler.setFormatter(logging.Formatter(
+                '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+            ))
+            file_handler.setLevel(logging.INFO)
+            app.logger.addHandler(file_handler)
+            app.logger.setLevel(logging.INFO)
+            app.logger.info('Agent Portal startup')
+        except (OSError, PermissionError):
+            # Silently skip file logging on read-only filesystems
+            pass
 
 
 # ========================================
