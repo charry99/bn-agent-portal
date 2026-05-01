@@ -645,6 +645,22 @@ textarea {
     box-shadow: 0 0 30px rgba(15, 199, 255, 0.12);
 }
 
+.form-feedback {
+    min-height: 1.5rem;
+    color: var(--text);
+    font-size: 0.95rem;
+    margin: 0.25rem 0 0.75rem;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.form-feedback.success {
+    color: #7dfca4;
+}
+
+.form-feedback.error {
+    color: #ff6b6b;
+}
+
 .btn-block {
     width: 100%;
 }

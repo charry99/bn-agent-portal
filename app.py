@@ -17,8 +17,6 @@ from flask_migrate import Migrate
 from sqlalchemy import func
 import logging
 
-from tasks import daily_checkin, auto_post_listings, auto_send_messages
-
 # Import configuration from config.py
 from config import get_config, Config, DevelopmentConfig, ProductionConfig, TestingConfig
 
@@ -205,7 +203,9 @@ def register_blueprints(app):
     def submit_contact():
         """Handle contact form submission"""
         try:
-            data = request.get_json()
+            data = request.get_json(silent=True)
+            if not data:
+                data = request.form.to_dict()
             
             # Validate input
             errors = validate_contact_form(data)
@@ -313,16 +313,19 @@ def register_blueprints(app):
 
     @api_bp.route('/checkin', methods=['GET', 'POST'])
     def api_checkin():
+        from tasks import daily_checkin
         daily_checkin()
         return {"status": "ok", "task": "checkin", "time": str(datetime.now())}
 
     @api_bp.route('/post-listings', methods=['GET', 'POST'])
     def api_post_listings():
+        from tasks import auto_post_listings
         auto_post_listings()
         return {"status": "ok", "task": "post_listings"}
 
     @api_bp.route('/send-messages', methods=['GET', 'POST'])
     def api_send_messages():
+        from tasks import auto_send_messages
         auto_send_messages()
         return {"status": "ok", "task": "send_messages"}
 
@@ -532,9 +535,6 @@ def register_cli_commands(app):
 app = create_app(os.environ.get('FLASK_ENV', 'development'))
 application = app
 handler = app
-
-
-from tasks import start_scheduler
 
 # ========================================
 # MAIN

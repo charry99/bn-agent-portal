@@ -82,4 +82,45 @@ document.addEventListener('DOMContentLoaded', () => {
             retina_detect: true
         });
     }
+
+    const contactForm = document.getElementById('contact-form');
+    const contactFeedback = document.getElementById('contact-feedback');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            if (contactFeedback) {
+                contactFeedback.textContent = 'Sending message...';
+                contactFeedback.className = 'form-feedback';
+            }
+
+            const formData = new FormData(contactForm);
+            const payload = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (contactFeedback) {
+                    contactFeedback.textContent = result.message || 'Message sent successfully.';
+                    contactFeedback.className = result.success ? 'form-feedback success' : 'form-feedback error';
+                }
+
+                if (result.success) {
+                    contactForm.reset();
+                }
+            } catch (error) {
+                if (contactFeedback) {
+                    contactFeedback.textContent = 'Unable to send message. Please try again later.';
+                    contactFeedback.className = 'form-feedback error';
+                }
+            }
+        });
+    }
 });

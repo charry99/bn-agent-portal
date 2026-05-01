@@ -159,7 +159,7 @@
                 <a href="mailto:agent@billionsnetwork.com" class="contact-pill"><i class="fas fa-envelope"></i> Email</a>
             </div>
         </div>
-        <form class="contact-card" data-aos="fade-left" action="/api/contact" method="POST">
+        <form id="contact-form" class="contact-card" data-aos="fade-left" action="/api/contact" method="POST">
             <label>Name</label>
             <input type="text" name="name" placeholder="Your name" required>
             <label>Email</label>
@@ -168,6 +168,7 @@
             <input type="tel" name="phone" placeholder="Your phone number" required>
             <label>Message</label>
             <textarea name="message" rows="6" placeholder="Tell me about your project" required></textarea>
+            <div id="contact-feedback" class="form-feedback" aria-live="polite"></div>
             <button type="submit" class="btn btn-primary btn-block">Send Message</button>
         </form>
     </div>
