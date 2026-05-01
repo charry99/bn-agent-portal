@@ -1,14 +1,35 @@
 :root {
-    --bg: #02060D;
-    --surface: rgba(10, 18, 34, 0.92);
-    --surface-strong: rgba(8, 12, 26, 0.98);
-    --text: #E3F2FF;
-    --muted: #8AA9D8;
-    --primary: #0FC7FF;
-    --secondary: #1EF286;
+    /* Dark backgrounds */
+    --bg: #0A0F1C;
+    --bg-secondary: #0F172A;
+    --surface: rgba(10, 15, 28, 0.92);
+    --surface-strong: rgba(10, 15, 28, 0.98);
+    
+    /* Text colors */
+    --text: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --muted: #64748B;
+    
+    /* Primary accents - Electric Blue & Neon Indigo */
+    --primary: #3B82F6;
+    --primary-dark: #2563EB;
+    --indigo: #6366F1;
+    
+    /* Secondary accents - Neon Purple & Pink */
+    --secondary: #A855F7;
+    --accent-pink: #EC4899;
+    
+    /* Success & utility */
+    --success: #22C55E;
     --gold: #F5C54D;
-    --glow-blue: rgba(15, 199, 255, 0.25);
-    --glow-green: rgba(30, 242, 134, 0.20);
+    
+    /* Glow effects */
+    --glow-blue: rgba(59, 130, 246, 0.3);
+    --glow-indigo: rgba(99, 102, 241, 0.25);
+    --glow-purple: rgba(168, 85, 247, 0.25);
+    --glow-pink: rgba(236, 72, 153, 0.2);
+    --glow-success: rgba(34, 197, 94, 0.2);
+    
     --border: rgba(255, 255, 255, 0.08);
 }
 
@@ -23,12 +44,13 @@ html {
 body {
     margin: 0;
     min-height: 100%;
-    background: radial-gradient(circle at top, rgba(15, 199, 255, 0.08), transparent 25%),
-                radial-gradient(circle at 20% 10%, rgba(30, 242, 134, 0.08), transparent 18%),
-                linear-gradient(180deg, #02060D 0%, #040A14 100%);
+    background: 
+        radial-gradient(circle at top, rgba(59, 130, 246, 0.12), transparent 35%),
+        radial-gradient(circle at 80% 50%, rgba(168, 85, 247, 0.08), transparent 40%),
+        linear-gradient(135deg, #0A0F1C, #111827, #020617);
     background-image: 
-        linear-gradient(rgba(15, 199, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15, 199, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     color: var(--text);
     font-family: 'Inter', 'Space Grotesk', sans-serif;
@@ -66,8 +88,8 @@ textarea {
     top: 0;
     z-index: 50;
     backdrop-filter: blur(18px);
-    background: rgba(1, 6, 16, 0.76);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: rgba(10, 15, 28, 0.76);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
 }
 
 .nav-inner {
@@ -93,11 +115,11 @@ textarea {
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    box-shadow: 0 0 18px rgba(15, 199, 255, 0.28);
+    background: linear-gradient(135deg, #3B82F6, #A855F7);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.35);
     font-family: 'Orbitron', sans-serif;
     font-weight: 900;
-    color: #02060D;
+    color: #0A0F1C;
 }
 
 .brand-text {
@@ -204,8 +226,8 @@ textarea {
     font-size: clamp(3rem, 5vw, 4.5rem);
     line-height: 0.96;
     margin: 0;
-    color: #fff;
-    text-shadow: 0 0 18px rgba(15, 199, 255, 0.18);
+    color: #F8FAFC;
+    text-shadow: 0 0 22px rgba(59, 130, 246, 0.28);
 }
 
 .hero-subtitle {
@@ -263,16 +285,27 @@ textarea {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: #040B16;
-    box-shadow: 0 13px 30px rgba(15, 199, 255, 0.24);
+    background: linear-gradient(90deg, #3B82F6, #A855F7);
+    color: #F8FAFC;
+    box-shadow: 0 13px 35px rgba(59, 130, 246, 0.35);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 18px 45px rgba(168, 85, 247, 0.4);
+    background: linear-gradient(90deg, #6366F1, #EC4899);
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(15, 23, 41, 0.78);
     color: var(--text);
-    border: 1px solid rgba(15, 199, 255, 0.14);
-    box-shadow: 0 10px 30px rgba(15, 199, 255, 0.08);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    box-shadow: 0 12px 28px rgba(99, 102, 241, 0.12);
+}
+
+.btn-secondary:hover {
+    background: rgba(59, 130, 246, 0.12);
+    border-color: rgba(168, 85, 247, 0.35);
+    box-shadow: 0 18px 45px rgba(99, 102, 241, 0.18);
 }
 
 .btn:hover {
@@ -286,10 +319,10 @@ textarea {
     gap: 1rem;
     padding: 1rem 1.25rem;
     border-radius: 24px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(15, 199, 255, 0.18);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 0 30px rgba(15, 199, 255, 0.12);
+    background: rgba(10, 15, 28, 0.72);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 32px rgba(99, 102, 241, 0.16);
 }
 
 .badge-icon {
@@ -298,7 +331,7 @@ textarea {
     display: grid;
     place-items: center;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(15, 199, 255, 0.15), rgba(30, 242, 134, 0.1));
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.15));
     color: var(--primary);
 }
 
@@ -317,9 +350,10 @@ textarea {
     position: relative;
     padding: 2rem;
     border-radius: 32px;
-    background: rgba(4, 8, 22, 0.92);
-    border: 1px solid rgba(15, 199, 255, 0.16);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+    background: rgba(10, 15, 28, 0.72);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    box-shadow: 0 30px 70px rgba(59, 130, 246, 0.16), 0 0 36px rgba(168, 85, 247, 0.08);
     overflow: hidden;
 }
 
@@ -327,7 +361,8 @@ textarea {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(15, 199, 255, 0.08), transparent 40%);
+    background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 25%),
+                radial-gradient(circle at bottom right, rgba(236, 72, 153, 0.08), transparent 30%);
     pointer-events: none;
 }
 
@@ -350,8 +385,8 @@ textarea {
     display: grid;
     gap: 0.35rem;
     padding: 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.15);
     border-radius: 18px;
 }
 
@@ -378,12 +413,13 @@ textarea {
     gap: 0.5rem;
     padding: 0.85rem 1rem;
     border-radius: 999px;
-    background: rgba(15, 199, 255, 0.08);
-    border: 1px solid rgba(15, 199, 255, 0.14);
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
     color: var(--primary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.85rem;
+    backdrop-filter: blur(8px);
 }
 
 .section {
@@ -422,7 +458,7 @@ textarea {
 .skills-section,
 .testimonials-section,
 .contact-section {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+    background: linear-gradient(180deg, rgba(10, 15, 28, 0.85), rgba(15, 23, 41, 0.6));
 }
 
 .about-section .about-copy,
@@ -430,10 +466,11 @@ textarea {
 .contact-card,
 .service-card,
 .testimonial-card {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 15, 28, 0.72);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(99, 102, 241, 0.15);
     border-radius: 28px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 36px rgba(99, 102, 241, 0.1), 0 0 24px rgba(99, 102, 241, 0.05);
 }
 
 .about-section .section-grid {
@@ -491,8 +528,8 @@ textarea {
     display: grid;
     gap: 0.35rem;
     padding: 1.1rem 1.2rem;
-    background: rgba(15, 199, 255, 0.05);
-    border: 1px solid rgba(15, 199, 255, 0.14);
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.15);
     border-radius: 18px;
 }
 
@@ -515,8 +552,8 @@ textarea {
 
 .service-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(15, 199, 255, 0.22);
-    box-shadow: 0 40px 80px rgba(15, 199, 255, 0.12);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
 }
 
 .icon-glow {
@@ -526,7 +563,7 @@ textarea {
     place-items: center;
     border-radius: 18px;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, rgba(15, 199, 255, 0.18), rgba(30, 242, 134, 0.12));
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(168, 85, 247, 0.15));
     color: var(--primary);
 }
 
@@ -550,8 +587,9 @@ textarea {
 .skill-chip {
     padding: 0.95rem 1.4rem;
     border-radius: 999px;
-    background: rgba(15, 199, 255, 0.1);
-    border: 1px solid rgba(15, 199, 255, 0.18);
+    background: rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
     color: var(--text);
     font-weight: 600;
     text-transform: uppercase;
@@ -608,14 +646,17 @@ textarea {
     gap: 0.75rem;
     padding: 0.95rem 1.2rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(59, 130, 246, 0.08);
+    backdrop-filter: blur(8px);
     color: var(--text);
     text-decoration: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.18);
 }
 
 .contact-pill:hover {
-    background: rgba(15, 199, 255, 0.12);
+    background: rgba(59, 130, 246, 0.18);
+    border-color: rgba(59, 130, 246, 0.35);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
 }
 
 .contact-card {
@@ -631,8 +672,9 @@ textarea {
 
 .contact-card input,
 .contact-card textarea {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(10, 15, 28, 0.75);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(99, 102, 241, 0.16);
     border-radius: 18px;
     padding: 1rem 1.1rem;
     color: var(--text);
@@ -641,8 +683,8 @@ textarea {
 
 .contact-card input:focus,
 .contact-card textarea:focus {
-    border-color: rgba(15, 199, 255, 0.3);
-    box-shadow: 0 0 30px rgba(15, 199, 255, 0.12);
+    border-color: rgba(168, 85, 247, 0.35);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.18);
 }
 
 .form-feedback {
@@ -667,8 +709,8 @@ textarea {
 
 .footer-section {
     padding: 2.5rem 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgba(10, 15, 28, 0.92), rgba(15, 23, 41, 0.72));
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .footer-grid {
@@ -696,9 +738,11 @@ textarea {
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.25rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(15, 199, 255, 0.14);
+    background: rgba(10, 15, 28, 0.72);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(99, 102, 241, 0.16);
     border-radius: 22px;
+    box-shadow: 0 0 24px rgba(99, 102, 241, 0.12);
 }
 
 .footer-badge-title {
@@ -717,7 +761,7 @@ textarea {
     display: grid;
     place-items: center;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(15, 199, 255, 0.24), rgba(245, 197, 77, 0.16));
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(168, 85, 247, 0.2));
     color: var(--primary);
 }
 
@@ -733,17 +777,18 @@ textarea {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: rgba(15, 199, 255, 0.1);
+    background: rgba(59, 130, 246, 0.12);
+    backdrop-filter: blur(8px);
     color: var(--primary);
     transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-    border: 1px solid rgba(15, 199, 255, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .social-link:hover {
-    background: rgba(15, 199, 255, 0.25);
-    border-color: rgba(15, 199, 255, 0.4);
+    background: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.4);
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(15, 199, 255, 0.15);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
 }
 
 @media screen and (max-width: 960px) {
