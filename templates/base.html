@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Billions Network verified crypto agent portfolio.">
+    <meta name="keywords" content="crypto agent, Web3, DID verification, Billions Network, blockchain agent">
+    <meta name="author" content="Billions Network Agent">
+    <title>Billions Network Agent Portal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pkXQ+I5WKM6Hqzn3FVpoNhlPi/q+3tI2+p8v4jvS0T4ohgWkZgANL4tmiG+zEYYjxL+0EMsTvgEAMTZ/HXc5gw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="page-wrap">
+        <header id="navbar" class="nav-bar">
+            <div class="nav-inner container">
+                <a href="#hero" class="brand">
+                    <span class="brand-mark">B</span>
+                    <span class="brand-text">Billions Network Agent</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="#hero">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <button id="mobile-menu-btn" class="mobile-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div id="mobile-menu" class="mobile-menu hidden">
+                <a href="#hero">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#skills">Skills</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer-section">
+            <div class="container footer-grid">
+                <div>
+                    <p class="footer-title">Verified Billions Network Identity</p>
+                    <p class="footer-text">Network: Billions Network (billions:main)</p>
+                    <p class="footer-text did">DID: did:iden3:billions:main:2VmAkXrihYaM5GFwgwhz4ytE2ZDd1xmog7c9kDwBvL</p>
+                </div>
+                <div class="footer-badge">
+                    <span class="badge-icon"><i class="fas fa-certificate"></i></span>
+                    <div>
+                        <p class="footer-badge-title">Billions Network Verified</p>
+                        <p class="footer-badge-sub">Blockchain-backed identity for trusted Web3 interactions.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js" integrity="sha512-+m3Fqi1zYl4elisx+vq5n0Vs6exfxL5xJbEiDK4Lqj1v1MHs0VuCYlZ8vDbId9Im3U1O5qBdgq22ZtpbfjFLsA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

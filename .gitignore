@@ -1,0 +1,135 @@
+# ========================================
+# Python
+# ========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ========================================
+# Virtual Environment
+# ========================================
+venv/
+ENV/
+env/
+.venv
+
+# ========================================
+# Flask
+# ========================================
+instance/
+.webassets-cache
+*.db
+*.sqlite
+*.sqlite3
+
+# ========================================
+# IDEs
+# ========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ========================================
+# Security - Private Keys & Secrets
+# ========================================
+*.key
+*private*
+secrets/
+.env
+.env.local
+.env.*.local
+private_key.txt
+*.pem
+*.p12
+
+# ========================================
+# Logs
+# ========================================
+logs/
+*.log
+
+# ========================================
+# Uploads
+# ========================================
+uploads/
+media/
+tmp/
+temp/
+
+# ========================================
+# OS Files
+# ========================================
+.DS_Store
+Thumbs.db
+*.lnk
+desktop.ini
+
+# ========================================
+# Testing
+# ========================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# ========================================
+# Build artifacts
+# ========================================
+dist/
+build/
+*.egg-info/
+
+# ========================================
+# Documentation
+# ========================================
+site/
+docs/_build/
+
+# ========================================
+# Dependencies
+# ========================================
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ========================================
+# Node (if using npm for frontend tools)
+# ========================================
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# ========================================
+# Docker
+# ========================================
+.dockerignore
+docker-compose.override.yml
+.vercel

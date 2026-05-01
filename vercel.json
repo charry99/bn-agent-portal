@@ -2,14 +2,28 @@
   "version": 2,
   "builds": [
     {
-      "src": "handler.py",
-      "use": "@vercel/python@6.37.0"
+      "src": "app.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/handler.py"
+      "dest": "app.py"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/checkin",
+      "schedule": "0 9 * * *"
+    },
+    {
+      "path": "/api/post-listings",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/send-messages",
+      "schedule": "0 18 * * *"
     }
   ]
 }

@@ -17,6 +17,8 @@ from flask_migrate import Migrate
 from sqlalchemy import func
 import logging
 
+from tasks import daily_checkin, auto_post_listings, auto_send_messages
+
 # Import configuration from config.py
 from config import get_config, Config, DevelopmentConfig, ProductionConfig, TestingConfig
 
@@ -67,6 +69,14 @@ def create_app(config_name='development'):
     # Create tables
     with app.app_context():
         db.create_all()
+
+    # Optionally start background scheduler when explicitly enabled
+    if os.environ.get('START_SCHEDULER', 'false').lower() == 'true':
+        try:
+            from tasks import start_scheduler
+            start_scheduler(app)
+        except Exception as e:
+            app.logger.exception('Failed to start background scheduler')
     
     return app
 
@@ -300,7 +310,22 @@ def register_blueprints(app):
             return jsonify({'success': True, 'agent': agent_info}), 200
         except Exception as e:
             return jsonify({'success': False, 'message': 'Error fetching agent verification'}), 500
-    
+
+    @api_bp.route('/checkin', methods=['GET', 'POST'])
+    def api_checkin():
+        daily_checkin()
+        return {"status": "ok", "task": "checkin", "time": str(datetime.now())}
+
+    @api_bp.route('/post-listings', methods=['GET', 'POST'])
+    def api_post_listings():
+        auto_post_listings()
+        return {"status": "ok", "task": "post_listings"}
+
+    @api_bp.route('/send-messages', methods=['GET', 'POST'])
+    def api_send_messages():
+        auto_send_messages()
+        return {"status": "ok", "task": "send_messages"}
+
     app.register_blueprint(main_bp)
     app.register_blueprint(api_bp)
 
@@ -491,23 +516,32 @@ def register_cli_commands(app):
         else:
             print('Cancelled.')
 
+    @app.cli.command()
+    def run_scheduler():
+        """Start the background task scheduler."""
+        from tasks import start_scheduler
+        start_scheduler(app)
+        print('Background scheduler started.')
+
 
 # ========================================
 # WSGI APPLICATION
 # ========================================
 
 # Create top-level app for WSGI servers and Vercel
-app = create_app(os.environ.get('FLASK_ENV', 'production'))
+app = create_app(os.environ.get('FLASK_ENV', 'development'))
 application = app
 handler = app
 
+
+from tasks import start_scheduler
 
 # ========================================
 # MAIN
 # ========================================
 
 if __name__ == '__main__':
-    # Run development server
+    scheduler = start_scheduler()
     app.run(
         host='0.0.0.0',
         port=int(os.environ.get('PORT', 5000)),

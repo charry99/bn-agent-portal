@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Verification | Billions Network</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-white">
+    <header class="bg-slate-900 border-b border-slate-800">
+        <div class="container mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+                <p class="text-sm uppercase tracking-[0.3em] text-amber-300">Billions Network Agent Portal</p>
+                <h1 class="text-3xl md:text-4xl font-bold mt-3">Agent Verification</h1>
+            </div>
+            <a href="/" class="inline-flex items-center justify-center rounded-full border border-amber-300 px-5 py-3 text-sm font-semibold text-amber-100 transition hover:bg-amber-300 hover:text-slate-950">Back to Home</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-14">
+        <div class="rounded-[32px] border border-slate-800 bg-slate-900/90 p-10 shadow-2xl shadow-slate-950/40">
+            <div class="flex flex-col gap-6">
+                <div class="space-y-3">
+                    <span class="text-sm uppercase tracking-[0.35em] text-amber-300">Verified Identity</span>
+                    <h2 class="text-4xl font-bold text-white">Billions Network DID Verification</h2>
+                    <p class="max-w-2xl text-slate-300">This page confirms the agent identity information used by the portal. The DID and verification details are managed securely in the backend configuration.</p>
+                </div>
+
+                <div class="grid gap-6 lg:grid-cols-2">
+                    <div class="rounded-3xl border border-slate-700 bg-slate-950/80 p-8">
+                        <h3 class="text-xl font-semibold text-white">Agent Identity</h3>
+                        <p class="mt-3 text-slate-300">Name: <strong>{{ agent.name }}</strong></p>
+                        <p class="mt-2 text-slate-300">Title: <strong>{{ agent.title }}</strong></p>
+                        <p class="mt-2 text-slate-300">City: <strong>{{ agent.city }}</strong></p>
+                        <p class="mt-2 text-slate-300">Network: <strong>{{ agent.network }}</strong></p>
+                    </div>
+
+                    <div class="rounded-3xl border border-slate-700 bg-slate-950/80 p-8">
+                        <h3 class="text-xl font-semibold text-white">DID Details</h3>
+                        <p class="mt-3 text-slate-300">DID:</p>
+                        <code class="mt-2 block rounded-xl bg-slate-900 p-4 text-sm text-amber-200">{{ agent.agent_did }}</code>
+                        <p class="mt-4 text-slate-400">This DID is used for identity verification and does not expose private keys.</p>
+                    </div>
+                </div>
+
+                <div class="rounded-3xl border border-slate-700 bg-slate-950/80 p-8">
+                    <h3 class="text-xl font-semibold text-white">Verification Status</h3>
+                    <p class="mt-3 text-slate-300">Status: <strong class="text-emerald-400">Verified</strong></p>
+                    <p class="mt-2 text-slate-300">Verification page: <a href="{{ url_for('main.index') }}" class="text-amber-300 underline">Local portal verification page</a></p>
+                    <p class="mt-2 text-slate-300">External verification is not available through the old broken Billions URL.</p>
+                </div>
+
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <a href="/" class="inline-flex items-center justify-center rounded-full bg-amber-300 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200">Return to Homepage</a>
+                    <a href="https://billions.network" target="_blank" class="inline-flex items-center justify-center rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-white transition hover:border-amber-300 hover:text-amber-300">Billions Network</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

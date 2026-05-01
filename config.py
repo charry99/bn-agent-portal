@@ -29,17 +29,22 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
     SQLALCHEMY_ECHO = False
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_size': 10,
-        'pool_recycle': 3600,
-        'pool_pre_ping': True,
-    }
     
     # Use SQLite by default, but allow PostgreSQL via environment variable
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL',
         f'sqlite:///{BASE_DIR / "instance" / "agent_portal.db"}'
     )
+    
+    # Engine options - only for non-SQLite databases
+    if 'sqlite' in SQLALCHEMY_DATABASE_URI:
+        SQLALCHEMY_ENGINE_OPTIONS = {}
+    else:
+        SQLALCHEMY_ENGINE_OPTIONS = {
+            'pool_size': 10,
+            'pool_recycle': 3600,
+            'pool_pre_ping': True,
+        }
     
     # ========================================
     # File Upload Configuration

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # Flask Web Application
+  web:
+    build: .
+    container_name: bn-agent-portal
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - SECRET_KEY=your-secret-key-change-in-production
+      - DATABASE_URL=postgresql://agent:password@postgres:5432/agent_portal
+      - DEBUG=True
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+    depends_on:
+      - postgres
+    networks:
+      - bn-network
+    command: flask run --host=0.0.0.0
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: bn-agent-portal-db
+    environment:
+      - POSTGRES_USER=agent
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=agent_portal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - bn-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agent"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Adminer - Database Management UI (Optional)
+  adminer:
+    image: adminer
+    container_name: bn-agent-portal-adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - bn-network
+    restart: unless-stopped
+    environment:
+      - ADMINER_DEFAULT_SERVER=postgres
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  bn-network:
+    driver: bridge
