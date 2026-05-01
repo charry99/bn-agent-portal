@@ -1,5 +1,11 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "handler.py",
+      "use": "@vercel/python@6.37.0"
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
