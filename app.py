@@ -21,6 +21,29 @@ import logging
 from config import get_config, Config, DevelopmentConfig, ProductionConfig, TestingConfig
 
 
+def ensure_writable_sqlite(app):
+    """Adjust SQLite database path for writable serverless environments."""
+    uri = app.config.get('SQLALCHEMY_DATABASE_URI', '')
+    if not uri.startswith('sqlite:///'):
+        return
+
+    db_path = Path(uri.replace('sqlite:///', '', 1))
+    try:
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+        if db_path.exists():
+            if not os.access(db_path, os.W_OK):
+                raise PermissionError
+        elif not os.access(db_path.parent, os.W_OK):
+            raise PermissionError
+    except (OSError, PermissionError):
+        fallback = Path('/tmp/instance/agent_portal.db')
+        try:
+            fallback.parent.mkdir(parents=True, exist_ok=True)
+            app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{fallback}'
+        except (OSError, PermissionError):
+            pass
+
+
 # ========================================
 # APPLICATION FACTORY
 # ========================================
@@ -39,6 +62,9 @@ def create_app(config_name=None):
     
     # Initialize configuration
     config_obj.init_app(app)
+    
+    # Ensure SQLite database uses a writable path when running in serverless environments
+    ensure_writable_sqlite(app)
     
     # Ensure upload folder exists (but don't fail on read-only filesystems)
     try:
