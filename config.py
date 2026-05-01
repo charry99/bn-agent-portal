@@ -144,7 +144,10 @@ class Config:
         try:
             os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
             os.makedirs(Config.LOG_FILE.parent, exist_ok=True)
-            os.makedirs(BASE_DIR / 'instance', exist_ok=True)
+            if os.environ.get('VERCEL', '0') == '1':
+                os.makedirs('/tmp/instance', exist_ok=True)
+            else:
+                os.makedirs(BASE_DIR / 'instance', exist_ok=True)
         except (OSError, PermissionError):
             # Silently ignore errors on read-only filesystems (Vercel, etc.)
             pass
@@ -172,11 +175,14 @@ class ProductionConfig(Config):
     SEND_FILE_MAX_AGE_DEFAULT = 31536000  # 1 year
     CACHE_DEFAULT_TIMEOUT = 3600  # Longer cache in production
     
-    # Database must be PostgreSQL in production
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'DATABASE_URL',
-        'postgresql://user:password@localhost/agent_portal'
-    )
+    # Use environment database URL if provided.
+    # On Vercel without DATABASE_URL, fall back to an ephemeral SQLite path.
+    if os.environ.get('DATABASE_URL'):
+        SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    elif os.environ.get('VERCEL', '0') == '1':
+        SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/instance/agent_portal.db'
+    else:
+        SQLALCHEMY_DATABASE_URI = 'postgresql://user:password@localhost/agent_portal'
     
     # Ensure HTTPS
     PREFERRED_URL_SCHEME = 'https'
@@ -212,6 +218,10 @@ config = {
 def get_config(env=None):
     """Get configuration based on environment"""
     if env is None:
-        env = os.environ.get('FLASK_ENV', 'development')
+        env = os.environ.get('FLASK_ENV')
+        if not env and os.environ.get('VERCEL', '0') == '1':
+            env = 'production'
+        else:
+            env = env or 'development'
     
     return config.get(env, config['default'])

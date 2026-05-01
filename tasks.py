@@ -44,7 +44,7 @@ def auto_post_listings(app=None):
     try:
         if app is None:
             from app import create_app
-            app = create_app(os.environ.get('FLASK_ENV', 'development'))
+            app = create_app()
 
         from app import db, Property
 
@@ -72,7 +72,7 @@ def auto_send_messages(app=None):
     try:
         if app is None:
             from app import create_app
-            app = create_app(os.environ.get('FLASK_ENV', 'development'))
+            app = create_app()
 
         from app import db, Lead
 
@@ -103,7 +103,7 @@ def start_scheduler(app=None):
 
     if app is None:
         from app import create_app
-        app = create_app(os.environ.get('FLASK_ENV', 'development'))
+        app = create_app()
 
     scheduler = BackgroundScheduler()
 

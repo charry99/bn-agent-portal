@@ -25,7 +25,7 @@ from config import get_config, Config, DevelopmentConfig, ProductionConfig, Test
 # APPLICATION FACTORY
 # ========================================
 
-def create_app(config_name='development'):
+def create_app(config_name=None):
     """Create and configure Flask application"""
     
     # Create Flask app
@@ -532,7 +532,7 @@ def register_cli_commands(app):
 # ========================================
 
 # Create top-level app for WSGI servers and Vercel
-app = create_app(os.environ.get('FLASK_ENV', 'development'))
+app = create_app()
 application = app
 handler = app
 
