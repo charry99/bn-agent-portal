@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.getElementById('navbar');
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileCloseBtn = document.getElementById('mobile-close-btn');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -55,6 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mobileMenuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileCloseBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
     });
 
     document.querySelectorAll('#mobile-menu a').forEach(link => {
